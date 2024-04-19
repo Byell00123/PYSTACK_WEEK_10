@@ -1,0 +1,31 @@
+:root {
+    --main-color: #00ccbe;
+    --dark-color: #09a6a3;
+    --contrast-color: #ffd686;
+}
+.bg-color-dark {
+    background-color: var(--main-color);
+}
+.p-bold {
+    font-weight: bold;
+}
+.color-dark {
+    color: var(--dark-color);
+}
+
+
+
+/* .bg-body-tertiary{
+    background-color: #14fff4 !important;
+    #0dcaf0
+} */
+
+.navbar-expand-lg .navbar-nav{
+    margin-left: 10px;
+}
+/* Dermatologia
+Otorrinolaringologia
+Pediatria
+Ortopedi
+Urologia
+Cardiologia */

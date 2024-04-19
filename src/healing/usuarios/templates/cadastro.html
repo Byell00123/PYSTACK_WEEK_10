@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block 'title' %} - Cadastro{% endblock 'title' %}
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'usuarios/css/usuarios.css' %}">
+{% endblock 'head' %}
+
+{% block 'body' %}
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md d-flex justify-content-center">
+                <div class="cont-cadastro">
+                    <br>
+                    <br>
+                    <section class="cont-logo">
+                        <img class="logo" src="{% static 'geral/img/logo.png' %}">
+                        <label class="text-logo">HEALING</label>
+                    </section>
+                    <hr>
+                    <form action="{% url 'cadastro' %}" method="POST">{% csrf_token %}
+
+                        {% if messages %} {% comment %} messages == lista de mensagens. {% endcomment %}
+                            {% for message in messages %} {% comment %} message == variavel criada para percorrer a lista, podendo ate mudar de nome. {% endcomment %}
+                                <section class="alert {{message.tags}}">{{message}}</section>{% comment %} {{message.tags}} == variavel que vem do settings.py linha: 110. {% endcomment %}
+                            {% endfor %}
+                        {% endif %}
+
+                        <h2 class="fonte-destaque1">Cadastre-se</h2>
+                        <br>
+                        <label for="">Nome de Usuario</label>
+                        <input type="text" name="nome_usuario" id="" class="form-control" placeholder="Nome de Usuario ..." autocomplete="username">
+                        <br>
+                        <label for="">E-mail</label>
+                        <input type="text" name="email" id="" class="form-control" placeholder="email@email.com" autocomplete="email">
+                        <br>
+                        <div class="row">
+                            <div class="col-md">
+                                <label for="">Senha</label>
+                                <input type="password" name="senha" class="form-control" placeholder="Digite sua senha ..." autocomplete="new-password">
+                            </div>
+                            <div class="col-md">
+                                <label for="">Confirmar senha</label>
+                                <input type="password" name="confirmar_senha" class="form-control" placeholder="Digite sua senha novamente ..." id="" autocomplete="off">
+                            </div>
+                        </div>
+                        <br>
+
+                        <input type="submit" value="Cadastrar" class="btn btn-success btn-dark-color">
+                        <a href="{% url 'login' %}" class="btn btn-dark-color-outline">Já possuo uma conta</a>
+                    </form>
+                </div>
+
+            </div>
+            <div class="col-md bg-main d-flex justify-content-center align-items-center"><img src="{% static 'usuarios/img/ilustracao.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+
+{% endblock 'body' %}
