@@ -5,6 +5,7 @@
 {% endblock 'head' %}
 {% block 'body' %}
     <div class="container-fluid">
+        {% block 'mensagens' %}{% endblock 'mensagens' %}
         <div class="row">
             <div class="col-md d-flex justify-content-center">
             <div class="cont-cadastro">
@@ -17,14 +18,7 @@
                 <hr>
                 <form action="{% url 'login' %}" method="POST">{% csrf_token %}
                     <h2 class="fonte-destaque1">Logar</h2>
-                    {% if messages %}
-                        <br>
-                        {% for message in messages %}
-                            <section class="alert {{message.tags}}">
-                                {{message}}
-                            </section>
-                        {% endfor %}
-                    {% endif %}
+                    <br>
                     <br>
                     <label for="">Nome de Usuario</label>
                     <input type="text" name="nome_usuario" id="" class="form-control" placeholder="Nome de Usuario ..." autocomplete="username">

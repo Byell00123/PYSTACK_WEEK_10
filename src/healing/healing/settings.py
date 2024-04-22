@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 
     'usuarios',
     'medicos',
+    'pacientes',
 ]
 
 MIDDLEWARE = [
@@ -92,7 +93,7 @@ TIME_ZONE = 'America/Araguaina'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False #True
 
 STATIC_URL = '/static/'
 
@@ -110,8 +111,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MESSAGE_TAGS = {
     constants.DEBUG: 'alert-primary',
-    constants.ERROR: 'alert-danger',
-    constants.SUCCESS: 'alert-success',
-    constants.INFO: 'alert-info',
-    constants.WARNING: 'alert-warning',
+    constants.ERROR: 'alert-danger', # Vermelho
+    constants.SUCCESS: 'alert-success', # Verde
+    constants.INFO: 'alert-info', # Azul
+    constants.WARNING: 'alert-warning', # Amarelo
 }

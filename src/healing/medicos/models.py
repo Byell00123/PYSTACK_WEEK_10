@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 
 class Especialidades(models.Model):
     especialidade = models.CharField(max_length=150)
@@ -18,13 +19,26 @@ class DadosMedico(models.Model):
     rg = models.ImageField(upload_to="rgs")
     cedula_identidade_medica = models.ImageField(upload_to='cim')
     foto = models.ImageField(upload_to="fotos_perfil")
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     descricao = models.TextField(null=True, blank=True)
-    especialidade = models.ForeignKey(Especialidades, on_delete=models.DO_NOTHING, null=True, blank=True)
     valor_consulta = models.FloatField(default=100)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    especialidade = models.ForeignKey(Especialidades, on_delete=models.DO_NOTHING, null=True, blank=True)
 
     def __str__(self):
         return self.user.username
+    
+    @property
+    def proxima_data(self):
+        proxima_data = DatasAbertas.objects.filter(user=self.user).filter(data__gt=datetime.now()).filter(agendado=False).order_by('data').first()
+        return proxima_data
 
 def is_medico(user):
     return DadosMedico.objects.filter(user=user).exists()
+
+class DatasAbertas(models.Model):
+    data = models.DateTimeField()
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    agendado = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.data)
